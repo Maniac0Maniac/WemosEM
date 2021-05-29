@@ -1,0 +1,3 @@
+// WIFI
+#define DEFAULT_WIFI_NAME ""
+#define DEFAULT_WIFI_PASSWORD ""

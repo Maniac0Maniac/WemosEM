@@ -12,8 +12,6 @@
 #define DEFAULT_EMPTY ""
 
 // WIFI
-#define DEFAULT_WIFI_NAME ""
-#define DEFAULT_WIFI_PASSWORD ""
 #define DEFAULT_IP_MODE 0 //  0 = DHCP, 1 = Static
 #define DEFAULT_IP ""
 #define DEFAULT_MASK ""
