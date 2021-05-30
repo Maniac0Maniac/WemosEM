@@ -54,17 +54,11 @@ String WifiGetRssiAsQuality(int rssi)
   int quality = 2 * (rssi + 100);
 
   if (rssi <= -100) {
-    qualityStr = "0% No signal";
+    qualityStr = "0";
   } else if (rssi >= -50) {
-    qualityStr = "100% Excelent";
-  } else if (rssi >= -60) {
-    qualityStr = String(quality) + "% Good";
-  } else if (rssi >= -70) {
-    qualityStr = String(quality) + "% Poor";
-  } else if (rssi > -80) {
-    qualityStr = String(quality) + "% Bad";
+    qualityStr = "100";
   }  else {
-    qualityStr = String(quality) + "% Very weak";
+    qualityStr = String(quality);
   }
   return qualityStr;
 }
