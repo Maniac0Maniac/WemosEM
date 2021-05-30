@@ -9,6 +9,9 @@
   Compile with Arduino 2.4.2
 */
 
+//Debugging
+bool Debugging = false; 
+
 // I/O
 #define Status_LED 2 // D4
 #define Status_LED_On digitalWrite(Status_LED, HIGH)
@@ -60,7 +63,7 @@ const PROGMEM char TOPIC_HA_RSSI[] = "homeassistant/sensor/%s/rssi/config";
 const PROGMEM char MESSAGE_HA_CURRENT[] = "{\"name\":\"%s Current\",\"unit_of_measurement\":\"A\",\"value_template\":\"{{ value_json.current }}\",\"device_class\":\"current\",\"unique_id\":\"%s_current\",";  //\"icon\":\"mdi:counter\",
 const PROGMEM char MESSAGE_HA_POWER[] = "{\"name\":\"%s Watts\",\"unit_of_measurement\":\"W\",\"value_template\":\"{{ value_json.watts }}\",\"device_class\":\"power\",\"unique_id\":\"%s_watts\",";  //,\"icon\":\"mdi:counter\"
 const PROGMEM char MESSAGE_HA_KWH[] = "{\"name\":\"%s Kwh\",\"unit_of_measurement\":\"Kwh\",\"value_template\":\"{{ value_json.kwh }}\",\"device_class\":\"energy\",\"unique_id\":\"%s_kwh\","; //,\"icon\":\"mdi:counter\"
-const PROGMEM char MESSAGE_HA_RSSI[] = "{\"name\":\"%s RSSI\",\"unit_of_measurement\":\"%%\",\"value_template\":\"{{ value_json.wifidb }}\",\"device_class\":\"power\",\"unique_id\":\"%s_rssi\",\"icon\":\"mdi:access-point\",";
+const PROGMEM char MESSAGE_HA_RSSI[] = "{\"name\":\"%s RSSI\",\"unit_of_measurement\":\"%%\",\"value_template\":\"{{ value_json.rssi }}\",\"device_class\":\"power\",\"unique_id\":\"%s_rssi\",\"icon\":\"mdi:access-point\",";
 
 const PROGMEM char MESSAGE_HA_FOOTER[]  = "\"state_topic\":\"wemos/%s/power\",\"json_attributes_topic\":\"wemos/%s/power\",\"availability_topic\":\"wemos/%s/status\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"}}";
 

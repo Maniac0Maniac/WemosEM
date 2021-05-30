@@ -492,5 +492,11 @@ void setup_http_server() {
 
   httpServer.begin();
   MDNS.addService("http", "tcp", 80);
-  Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username '%s' and your password\n", wifi_hostname.c_str(), update_path, system_username.c_str());
+
+  if (Debugging){
+    Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username '%s' and your password\n", wifi_hostname.c_str(), update_path, system_username.c_str());
+  }else{
+    Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username and your password\n", wifi_hostname.c_str(), update_path);
+  }
+
 }

@@ -108,7 +108,11 @@ boolean loadConfig() {
   }
 
   serializeJson(jsonConfig, jsonString);
-  Serial.println("LOADED CONFIG: " + jsonString);
+  if (Debugging){
+    Serial.println("LOADED CONFIG: " + jsonString);
+  }else{
+    Serial.println("LOADED CONFIG");
+  }
 
   // WIFI
   wifi_name = (jsonConfig["wifi_name"] == "" ? DEFAULT_WIFI_NAME : jsonConfig["wifi_name"].as<String>());

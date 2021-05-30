@@ -119,7 +119,7 @@ String build_payload() {
   json["beforeKwh"] = String(beforeResetKiloWattHours);
   json["ical"] = String(Ical);
   json["mqttreconnected"] = String(reconnected_count);
-  json["wifidb"] = rssi;
+  json["rssi"] = rssi;
   json["uptime"] = NTP.getUptimeString ();
   json["time"] = NTP.getTimeDateString();
   json["freemem"] = ESP.getFreeHeap();
@@ -198,7 +198,10 @@ void setupWifi() {
 
   wifiManager.setConfigPortalTimeout(180);
   wifiManager.setConnectTimeout(60);
-  Serial.println(" Wifi " + wifi_hostname + ", password " + system_password);
+  if (Debugging){
+    Serial.println(" Wifi_Hostname " + wifi_hostname + ", System_password " + system_password);
+  }
+  
   if (!wifiManager.autoConnect(wifi_hostname.c_str(), system_password.c_str())) {
     Serial.println("failed to connect and hit timeout (restart)");
     delay(3000);
