@@ -104,9 +104,9 @@ void em_loop() {
 
   lastMsgMQTT = now;
 
-  Status_LED_On;
+  //Status_LED_On;
   em_read();
-  Status_LED_Off;
+  //Status_LED_Off;
 
   blynk_loop();
   thinkgSpeak_loop();
