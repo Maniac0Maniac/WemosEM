@@ -114,7 +114,7 @@ String build_payload() {
 
   json["current"] = String(rmsCurrent);
   json["voltage"] = String(mainsVoltage);
-  json["watios"] = String(rmsPower);
+  json["watts"] = String(rmsPower);
   json["kwh"] = String(kiloWattHours);
   json["beforeKwh"] = String(beforeResetKiloWattHours);
   json["ical"] = String(Ical);

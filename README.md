@@ -118,7 +118,7 @@ SCT-019 | Current | 10 Ω | 24 kΩ | 116.13 | 40 kΩ | 171.43
       name: WemosEM-Consumo Actual
       icon: mdi:power-plug
       unit_of_measurement: "W"
-      value_template: "{{ value_json.watios }}"
+      value_template: "{{ value_json.watts }}"
     - platform: mqtt
       state_topic: "wemos/wemosEM-XXXXXX/power"
       name: WemosEM-KWh
@@ -161,7 +161,7 @@ if you have a device with Tasmota, add a automation in Home assistant:
 Go to Blynk app on your phone and layout the blynk project with virtual pin number according:
 - Virtual PIN V0: Voltage (V)
 - Virtual PIN V1: Current (A)
-- Virtual PIN V2: Live Watios (w)
+- Virtual PIN V2: Live watts (w)
 - Virtual PIN V3: Energy (kwh)
 - Virtual PIN V4: Energy before last reset (kwh)
 
@@ -171,7 +171,7 @@ Setup in web interface token auth, optional you can setup server and port server
 Setup in web interface token auth (Write API Key) and Channel number. 
 - Field 1: Voltage (V)
 - Field 2: Current (A)
-- Field 3: Live Watios (w)
+- Field 3: Live watts (w)
 - Field 4: Energy (kwh)
 - Field 5: Energy before last reset (kwh)
 

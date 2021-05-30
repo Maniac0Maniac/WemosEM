@@ -39,7 +39,7 @@
 // BLYNK Virtual Pins
 #define VPIN_VOLTAGE V0
 #define VPIN_CURRENT V1
-#define VPIN_WATIOS V2
+#define VPIN_watts V2
 #define VPIN_ENERGY V3
 #define VPIN_ENERGY_LAST_RESET V4
 
@@ -53,12 +53,12 @@ const PROGMEM char TOPIC_HA_RSSI[] = "homeassistant/sensor/%s/rssi/config";
 // const PROGMEM char TOPIC_HA_KWTOTAL[] = "homeassistant/sensor/%s/kwTotal/config";
 
 //const PROGMEM char MESSAGE_HA_CURRENT[] = "{\"unit_of_measurement\":\"A\",\"state_topic\":\"wemos/%s/power\",\"value_template\":\"{{ value_json.current }}\",\"json_attributes_topic\":\"wemos/%s/power\",\"name\":\"%s-current\",\"unique_id\":\"%s-current-wemosem\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"},\"icon\":\"mdi:counter\",\"availability_topic\":\"wemos/%s/status\"}";
-//const PROGMEM char MESSAGE_HA_POWER[] = "{\"unit_of_measurement\":\"w\",\"state_topic\":\"wemos/%s/power\",\"device_class\":\"power\",\"value_template\":\"{{ value_json.watios }}\",\"json_attributes_topic\":\"wemos/%s/power\",\"name\":\"%s-watios\",\"unique_id\":\"%s-watios-wemosem\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"},\"icon\":\"mdi:counter\",\"availability_topic\":\"wemos/%s/status\"}";
+//const PROGMEM char MESSAGE_HA_POWER[] = "{\"unit_of_measurement\":\"w\",\"state_topic\":\"wemos/%s/power\",\"device_class\":\"power\",\"value_template\":\"{{ value_json.watts }}\",\"json_attributes_topic\":\"wemos/%s/power\",\"name\":\"%s-watts\",\"unique_id\":\"%s-watts-wemosem\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"},\"icon\":\"mdi:counter\",\"availability_topic\":\"wemos/%s/status\"}";
 //const PROGMEM char MESSAGE_HA_KWH[] = "{\"unit_of_measurement\":\"kwh\",\"state_topic\":\"wemos/%s/power\",\"device_class\":\"power\",\"value_template\":\"{{ value_json.kwh }}\",\"json_attributes_topic\":\"wemos/%s/power\",\"name\":\"%s-kwh\",\"unique_id\":\"%s-kwh-wemosem\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"},\"icon\":\"mdi:counter\",\"availability_topic\":\"wemos/%s/status\"}";
 // const PROGMEM char MESSAGE_HA_KWTOTAL[] = "{\"unit_of_measurement\":\"kwTotal\",\"state_topic\":\"wemos/%s/power\",\"device_class\":\"power\",\"value_template\":\"{{ value_json.kwTotal }}\",\"json_attributes_topic\":\"wemos/%s/power\",\"name\":\"%s-kwTotal\",\"unique_id\":\"%s-kwTotal-wemosem\",\"device\":{\"identifiers\":[\"%s\"],\"name\":\"%s\",\"sw_version\":\"WemosEM 1.1\",\"model\":\"Wemos D1 Mini + SCT013\",\"manufacturer\":\"Wemos\"},\"icon\":\"mdi:counter\",\"availability_topic\":\"wemos/%s/status\"}";
 
 const PROGMEM char MESSAGE_HA_CURRENT[] = "{\"name\":\"%s Current\",\"unit_of_measurement\":\"A\",\"value_template\":\"{{ value_json.current }}\",\"device_class\":\"current\",\"unique_id\":\"%s_current\",";  //\"icon\":\"mdi:counter\",
-const PROGMEM char MESSAGE_HA_POWER[] = "{\"name\":\"%s Watts\",\"unit_of_measurement\":\"W\",\"value_template\":\"{{ value_json.watios }}\",\"device_class\":\"power\",\"unique_id\":\"%s_watts\",";  //,\"icon\":\"mdi:counter\"
+const PROGMEM char MESSAGE_HA_POWER[] = "{\"name\":\"%s Watts\",\"unit_of_measurement\":\"W\",\"value_template\":\"{{ value_json.watts }}\",\"device_class\":\"power\",\"unique_id\":\"%s_watts\",";  //,\"icon\":\"mdi:counter\"
 const PROGMEM char MESSAGE_HA_KWH[] = "{\"name\":\"%s Kwh\",\"unit_of_measurement\":\"Kwh\",\"value_template\":\"{{ value_json.kwh }}\",\"device_class\":\"energy\",\"unique_id\":\"%s_kwh\","; //,\"icon\":\"mdi:counter\"
 const PROGMEM char MESSAGE_HA_RSSI[] = "{\"name\":\"%s RSSI\",\"unit_of_measurement\":\"%%\",\"value_template\":\"{{ value_json.wifidb }}\",\"device_class\":\"power\",\"unique_id\":\"%s_rssi\",\"icon\":\"mdi:access-point\",";
 
@@ -86,7 +86,7 @@ long ms_since_last_message = 0;       // Time elapsed since last message was sen
 EnergyMonitor emon;
 
 // Data of Energy Monitor
-double watiosTotal = 0;               // Measured energy in watios/h
+double wattsTotal = 0;               // Measured energy in watts/h
 double kiloWattHours = 0;             // Measured energy in KWh
 double beforeResetKiloWattHours = 0;  // Measured energy in KWh
 double rmsCurrent = 0;                // Measured current in A

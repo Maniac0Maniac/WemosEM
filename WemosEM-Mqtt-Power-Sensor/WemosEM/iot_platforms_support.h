@@ -45,7 +45,7 @@ void blynk_loop() {
 
   Blynk.virtualWrite(VPIN_VOLTAGE, mainsVoltage);
   Blynk.virtualWrite(VPIN_CURRENT, rmsCurrent);
-  Blynk.virtualWrite(VPIN_WATIOS, rmsPower);
+  Blynk.virtualWrite(VPIN_watts, rmsPower);
   Blynk.virtualWrite(VPIN_ENERGY, kiloWattHours);
   Blynk.virtualWrite(VPIN_ENERGY_LAST_RESET, beforeResetKiloWattHours);
   

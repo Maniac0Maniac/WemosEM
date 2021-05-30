@@ -147,7 +147,7 @@ boolean loadConfig() {
   dayReset = (jsonConfig["dayReset"] == "" ? 0 : jsonConfig["dayReset"]);
 
   // KWH
-  watiosTotal = (jsonConfig["watiosTotal"] == "" ? 0.0 : jsonConfig["watiosTotal"]);
+  wattsTotal = (jsonConfig["wattsTotal"] == "" ? 0.0 : jsonConfig["wattsTotal"]);
   kiloWattHours = (jsonConfig["kiloWattHours"] == "" ? 0.0 : jsonConfig["kiloWattHours"]);
   beforeResetKiloWattHours = (jsonConfig["beforeResetKiloWattHours"] == "" ? 0.0 : jsonConfig["beforeResetKiloWattHours"]);
 
@@ -197,7 +197,7 @@ bool saveConfig() {
   jsonConfig["dayReset"] = dayReset;
 
   // KWH
-  jsonConfig["watiosTotal"] = watiosTotal;
+  jsonConfig["wattsTotal"] = wattsTotal;
   jsonConfig["kiloWattHours"] = kiloWattHours;
   jsonConfig["beforeResetKiloWattHours"] = beforeResetKiloWattHours;
 
