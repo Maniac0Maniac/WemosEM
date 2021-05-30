@@ -424,6 +424,7 @@ void handleSaveSystem() {
 
   //Reboot if hostname changed
   if (must_reboot){
+    Serial.println("Rebooting to apply config change...");
     restartESP = true;
   }
 
