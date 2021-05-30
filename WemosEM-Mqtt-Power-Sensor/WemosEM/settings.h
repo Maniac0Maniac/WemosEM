@@ -27,6 +27,7 @@
 #define DEFAULT_MINUTES_TIMEZONE 0
 
 // VARIABLES
+String system_username = DEFAULT_SYSTEM_USER;
 String system_password = DEFAULT_SYSTEM_PASSWORD;
 int ipMode = DEFAULT_IP_MODE; // 0 = DHCP, 1 = Static
 
@@ -140,6 +141,8 @@ boolean loadConfig() {
   timeZone = (jsonConfig["timezone"] == "" ? DEFAULT_TIMEZONE : jsonConfig["timezone"]);
   minutesTimeZone = (jsonConfig["minutes_timezone"] == "" ? DEFAULT_MINUTES_TIMEZONE : jsonConfig["minutes_timezone"]);
   // SYSTEM
+  wifi_hostname   = (jsonConfig["wifi_hostname"] == "" ? wifi_hostname : jsonConfig["wifi_hostname"].as<String>());
+  system_username = (jsonConfig["system_username"] == "" ? DEFAULT_SYSTEM_USER : jsonConfig["system_username"].as<String>());
   system_password = (jsonConfig["system_password"] == "" ? DEFAULT_SYSTEM_PASSWORD : jsonConfig["system_password"].as<String>());
   dayReset = (jsonConfig["dayReset"] == "" ? 0 : jsonConfig["dayReset"]);
 
@@ -188,9 +191,10 @@ bool saveConfig() {
   jsonConfig["timezone"] = timeZone;
   jsonConfig["minutes_timezone"] = minutesTimeZone;
   // SYSTEM
+  jsonConfig["wifi_hostname"] = wifi_hostname;
+  jsonConfig["system_username"] = system_username;
   jsonConfig["system_password"] = system_password;
   jsonConfig["dayReset"] = dayReset;
-
 
   // KWH
   jsonConfig["watiosTotal"] = watiosTotal;

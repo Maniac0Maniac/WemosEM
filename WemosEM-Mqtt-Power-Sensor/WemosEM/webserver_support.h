@@ -9,11 +9,11 @@
   Compile with Arduino 2.4.2
 */
 
-#include "data/index.html.gz.h"
+#include "data/test/index.html.gz.h"
 
 void handleRoot() {
 
-  if (system_password.length() > 0 && !httpServer.authenticate(DEFAULT_SYSTEM_USER, system_password.c_str())) {
+  if (system_password.length() > 0 && !httpServer.authenticate(system_username.c_str(), system_password.c_str())) {
     return httpServer.requestAuthentication();
   }
 
@@ -77,6 +77,8 @@ void handleConfig() {
   json["tsWriteAPIKey"] = tsWriteAPIKey;
 
   // SYSTEM - TIMEZONE
+  json["wifihostname"] = wifi_hostname;
+  json["systemusername"] = system_username;
   json["resetDay"] = dayReset;
   json["timezone"] = timeZone;
   json["minutestimezone"] = minutesTimeZone;
@@ -353,15 +355,19 @@ void handleSaveCalibrate() {
 void handleSaveSystem() {
 
   StaticJsonDocument<256> json;
-  String jsonString, _dayReset, _systempassword, _timezone, _minutestimezone;
+  String jsonString, _dayReset, _wifi_hostname, _systemusername, _systempassword, _timezone, _minutestimezone;
+  bool must_reboot = false;
 
-  _dayReset = httpServer.arg("resetDay");
+  _wifi_hostname = httpServer.arg("wifihostname");
+  _systemusername = httpServer.arg("systemusername");
 	_systempassword = httpServer.arg("systempassword");
+  _dayReset = httpServer.arg("resetDay");
   _timezone = httpServer.arg("timezone");
   _minutestimezone = httpServer.arg("minutestimezone");
 
-
+  Serial.print(" [WEB] - Username: " + _systemusername);
   Serial.print(" [WEB] - Password: " + _systempassword);
+  Serial.print(" Hostname: " + _wifi_hostname);
   Serial.print("WEB timezone SIZE: ");
   Serial.print( _timezone.length());
   Serial.print(" timezone value: ");
@@ -375,10 +381,25 @@ void handleSaveSystem() {
     json["dayReset"] = "Error: Reset day value incorrect (0-27) February restriction";
   }
 
+  if(_wifi_hostname.length() > 0) {
+    if(_wifi_hostname != wifi_hostname) {
+        must_reboot = true;
+    }
+    wifi_hostname = _wifi_hostname;
+  } else {
+    json["hostname"] = "Error: system hostname is empty";
+  }
+
+  if(_systemusername.length() > 0) {
+    system_username = _systemusername;
+  } else {
+    json["username"] = "Error: system username is empty";
+  }
+
   if(_systempassword.length() <= MAXLEN_SYSTEM_PASSWORD) {
     system_password = _systempassword;
   } else {
-    json["password"] = "Error: password system is incorrect > 30 characters";
+    json["password"] = "Error: system password is incorrect > 30 characters";
   }
 
   if(_timezone.length() > 0 && _timezone.length() <= MAXLEN_TIMEZONE && _timezone.toInt() >= -14 && _timezone.toInt() <= 14) {
@@ -400,6 +421,11 @@ void handleSaveSystem() {
   httpServer.send(200, "application/json", jsonString);
 
   saveConfig();
+
+  //Reboot if hostname changed
+  if (must_reboot){
+    restartESP = true;
+  }
 
   if (json.size() == 0 ) {
     // restartESP = true;
@@ -432,7 +458,7 @@ void setup_http_server() {
   } else {
     Serial.println("MDNS started FAILED");
   }
-  httpUpdater.setup(&httpServer, update_path, DEFAULT_SYSTEM_USER, (char *) system_password.c_str());
+  httpUpdater.setup(&httpServer, update_path, (char *) system_username.c_str(), (char *) system_password.c_str());
 
   httpServer.on("/", handleRoot);
 
@@ -462,5 +488,5 @@ void setup_http_server() {
 
   httpServer.begin();
   MDNS.addService("http", "tcp", 80);
-  Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username '%s' and your password\n", wifi_hostname.c_str(), update_path, DEFAULT_SYSTEM_USER);
+  Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username '%s' and your password\n", wifi_hostname.c_str(), update_path, system_username.c_str());
 }
