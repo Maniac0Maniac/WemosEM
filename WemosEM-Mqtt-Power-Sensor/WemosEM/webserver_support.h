@@ -9,7 +9,7 @@
   Compile with Arduino 2.4.2
 */
 
-#include "data/test/index.html.gz.h"
+#include "data/index.html.gz.h"
 
 void handleRoot() {
 

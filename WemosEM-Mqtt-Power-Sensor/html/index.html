@@ -1,3 +1,10 @@
+<!-- ************************************* NOTE *************************************-->
+<!-- * When changing this webpage, go the the below URL, and upload it.             *-->
+<!-- * https://www.mischianti.org/online-converter-file-to-cpp-gzip-byte-array-3/   *-->
+<!-- * Grab the output in the Generated gzipped filearray and place it's contents   *-->
+<!-- * in the /data/index.html.gz.h before uploading code                           *-->
+<!-- ********************************************************************************-->
+
 <!--Minimify: https://kangax.github.io/html-minifier/ -->
 <!DOCTYPE html>
 <html>
@@ -124,10 +131,13 @@
       $('#tsChannelNumber').val(data.tsChannelNumber);
       $('#tsWriteAPIKey').val(data.tsWriteAPIKey);
 
-      // SYSTEM - TIMEZONE
+      // SYSTEM
+      $('#wifiHostname').val(data.wifihostname);
+      $('#systemUsername').val(data.systemusername);      
       $('#reset-day').val(data.resetDay);
       $('#timezone').val(data.timezone);
       $('#minute-timezone').val(data.minutestimezone);
+
 
     }).fail(function (data) {
       showError("Error load configuration of WemosEM");
@@ -228,6 +238,8 @@
   function saveSystem() {
     var postSystem = $.post("/api/savesystem",
       {
+        wifihostname: $('#wifiHostname').val(),
+        systemusername: $('#systemUsername').val(),
         systempassword: $('#systemPassword').val(),
         resetDay: $('#reset-day').val(),
         timezone: $('#timezone').val(),
@@ -405,7 +417,7 @@
               <td class="voltage-value">0.0</td>
             </tr>
             <tr>
-              <th scope="row">watts</th>
+              <th scope="row">Watts</th>
               <td class="watts-value">0.00</td>
             </tr>
             <tr>
@@ -421,7 +433,7 @@
               <td class="mqttreconnected-value">0</td>
             </tr>
             <tr>
-              <th scope="row">Wifi dB</th>
+              <th scope="row">Wifi Signal %</th>
               <td class="rssi-value">0</td>
             </tr>
             <tr>
@@ -685,6 +697,21 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6 mb-2">
+                <label for="systemUsername">Username</label>
+                <input type="text" class="form-control form-control-sm" id="systemUsername" placeholder="" value="">
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="systemPassword">Password</label>
+                <div class="input-group input-group-sm mb-3">
+                  <input type="password" class="form-control form-control-sm" id="systemPassword" placeholder="" value="">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary see-system-password">view</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-2">
                 <label for="timezone">Timezone</label>
                 <input type="text" class="form-control form-control-sm" id="timezone" placeholder="" value="">
               </div>
@@ -692,22 +719,16 @@
                 <label for="minute-timezone">Minutes Timezone</label>
                 <input type="text" class="form-control form-control-sm" id="minute-timezone" placeholder="" value="">
               </div>
-            </div>
+            </div>            
             <div class="row">
+              <div class="col-md-6 mb-2">
+                <label for="wifiHostname">Hostname</label>
+                <input type="text" class="form-control form-control-sm" id="wifiHostname" placeholder="" value="">
+              </div>
               <div class="col-md-6 mb-2">
                 <label for="reset-day">Day of Month to reset Kwh</label>
                 <input type="text" class="form-control form-control-sm" id="reset-day" placeholder="" value="">
                 <small id="blynk-host-help" class="form-text text-muted">if the value is 0 no reset</small>
-              </div>
-              <div class="col-md-6 mb-2">
-                <label for="systemPassword">password</label>
-                <div class="input-group input-group-sm mb-3">
-                  <input type="password" class="form-control form-control-sm" id="systemPassword" placeholder=""
-                    value="">
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary see-system-password">view</button>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="row">
