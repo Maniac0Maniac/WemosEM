@@ -397,7 +397,10 @@ void handleSaveSystem() {
   }
 
   if(_systempassword.length() <= MAXLEN_SYSTEM_PASSWORD) {
-    system_password = _systempassword;
+    //Don't save blank passwords
+    if(_systempassword.length() > 0){
+      system_password = _systempassword;
+    }
   } else {
     json["password"] = "Error: system password is incorrect > 30 characters";
   }
