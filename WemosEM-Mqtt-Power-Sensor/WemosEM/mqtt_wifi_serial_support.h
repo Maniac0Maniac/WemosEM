@@ -129,7 +129,12 @@ String build_payload() {
   json["uptime"] = NTP.getUptimeString ();
   json["time"] = NTP.getTimeDateString();
   json["freemem"] = ESP.getFreeHeap();
-
+  json["Hostname"] = WiFi.hostname();
+  json["IPAddress"] = WiFi.localIP().toString();
+  json["Gateway"] = WiFi.gatewayIP().toString();
+  json["Subnetmask"] = WiFi.subnetMask().toString();
+  json["DNSServer"] = WiFi.dnsIP().toString();
+  json["Mac"] = WiFi.macAddress();
   serializeJson(json, jsonString);
 
   return jsonString;
@@ -226,24 +231,31 @@ void setupWifi() {
 
 void discoverHA() {
 
-  char topic[60], message[600];
+  char topic[60], message[600], footer[600];
+
+  Serial.println("Sending HA Discovery");
+  sprintf_P(footer, MESSAGE_HA_FOOTER, wifi_hostname.c_str(), wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str() );
 
   // Current (A)
-  Serial.println("Preparing topic HA Discover");
   sprintf_P(topic, TOPIC_HA_CURRENT, wifi_hostname.c_str() );
-  Serial.println("Preparing message HA Discover");
-  sprintf_P(message, MESSAGE_HA_CURRENT, wifi_hostname.c_str(), wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str() );
-  mqtt_client.publish(topic, message, true);
+  sprintf_P(message, MESSAGE_HA_CURRENT, wifi_hostname.c_str(), wifi_hostname.c_str() );
+  mqtt_client.publish(topic, strcat(message, footer), true);
 
-  // Power (watios)
+  // Power (watts)
   sprintf_P(topic, TOPIC_HA_POWER, wifi_hostname.c_str() );
-  sprintf_P(message, MESSAGE_HA_POWER, wifi_hostname.c_str(), wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str() );
-  mqtt_client.publish(topic, message, true);
+  sprintf_P(message, MESSAGE_HA_POWER, wifi_hostname.c_str(), wifi_hostname.c_str() );
+  mqtt_client.publish(topic, strcat(message, footer), true);
 
   // Power (kwh)
   sprintf_P(topic, TOPIC_HA_KWH, wifi_hostname.c_str() );
-  sprintf_P(message, MESSAGE_HA_KWH, wifi_hostname.c_str(), wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str(),wifi_hostname.c_str() );
-  mqtt_client.publish(topic, message, true);
+  sprintf_P(message, MESSAGE_HA_KWH, wifi_hostname.c_str(), wifi_hostname.c_str() );
+  mqtt_client.publish(topic, strcat(message, footer), true);
+
+  // RSSI (%)
+  sprintf_P(topic, TOPIC_HA_RSSI, wifi_hostname.c_str() );
+  sprintf_P(message, MESSAGE_HA_RSSI, wifi_hostname.c_str(), wifi_hostname.c_str() );
+  mqtt_client.publish(topic, strcat(message, footer), true);
+
 
   // Power (kwTotal)
   // sprintf_P(topic, TOPIC_HA_KWTOTAL, wifi_hostname.c_str() );
@@ -289,7 +301,7 @@ void initMqtt() {
         Serial.println(" MQTT Connected. ");
         mqtt_client.subscribe((char *)mqtt_topic_subscribe.c_str());
         // Discover Notify Home Assistant
-       // discoverHA();
+        discoverHA();
     } else {
       Serial.println("failed, rc=" + String(mqtt_client.state()) + " Try again in 5 seconds");
       // Wait 5 seconds before retrying
@@ -337,7 +349,7 @@ bool mqtt_reconnect() {
   if (connected) {
     Serial.println(" MQTT Connected. ");
     mqtt_client.subscribe((char *)mqtt_topic_subscribe.c_str());
-    // discoverHA();
+     discoverHA();
   } else {
     Serial.println("failed, rc=" + String(mqtt_client.state()) + " Try again...");
   }
