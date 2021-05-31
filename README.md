@@ -51,7 +51,7 @@ You can flash using software [nodemcu-pyflasher](https://github.com/marcelstoer/
 
 1. Download latest source.
 2. Rename secrets.h.example to secrets.h and update to taste
-3. In variables.h setting Debugging = true will print values to serial (remember to set it back to false to avoid credentail leaks)
+3. In variables.h setting Debugging = true will print variable values to serial (remember to set it back to false to avoid credentail leaks)
 4. Select Serial port (COM# port) where your serial-to-USB or NodeMCU/D1 mini is connected. Leave on auto-select if not sure.
 5. Browse to the binary you downloaded from WemosEM releases.
 6. Set Baud rate to 115200 and **Flash mode to DOUT**. Erase flash to **yes** if it is the first time flashing WemosEM on the device or you're experiencing issues with existing flash. If you're upgrading WemosEM set to no.
