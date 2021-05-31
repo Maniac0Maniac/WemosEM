@@ -50,13 +50,12 @@ Original Gerber files for the PCB layout and the source files for Kicad are incl
 You can flash using software [nodemcu-pyflasher](https://github.com/marcelstoer/nodemcu-pyflasher/releases)
 
 1. Download latest source.
-2. Download latest source.
-3. Rename secrets.h.example to secrets.h and update to taste
-4. In variables.h setting Debugging = true will print values to serial. Remember to set it back to false to avoid credentail leaks
-5. Select Serial port (COM# port) where your serial-to-USB or NodeMCU/D1 mini is connected. Leave on auto-select if not sure.
-6. Browse to the binary you downloaded from WemosEM releases.
-7. Set Baud rate to 115200 and **Flash mode to DOUT**. Erase flash to **yes** if it is the first time flashing WemosEM on the device or you're experiencing issues with existing flash. If you're upgrading WemosEM set to no.
-8. Click Flash NodeMCU and watch the progress in console.
+2. Rename secrets.h.example to secrets.h and update to taste
+3. In variables.h setting Debugging = true will print values to serial (remember to set it back to false to avoid credentail leaks)
+4. Select Serial port (COM# port) where your serial-to-USB or NodeMCU/D1 mini is connected. Leave on auto-select if not sure.
+5. Browse to the binary you downloaded from WemosEM releases.
+6. Set Baud rate to 115200 and **Flash mode to DOUT**. Erase flash to **yes** if it is the first time flashing WemosEM on the device or you're experiencing issues with existing flash. If you're upgrading WemosEM set to no.
+7. Click Flash NodeMCU and watch the progress in console.
 
 If the flash was successful the console will display:
   Firmware successfully flashed. unplug/replug or reset device to switch back to normal boot mode
