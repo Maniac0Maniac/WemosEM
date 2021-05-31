@@ -47,7 +47,9 @@ Original Gerber files for the PCB layout and the source files for Kicad are incl
 
 <img src="images/installation01.jpg" alt="installation01" align="right" width="200"/>
 
-Download latest [release](https://github.com/alcar21/WemosEM/releases)
+Download latest source.
+Rename secrets.h.example to secrets.h and update to taste
+In variables.h setting Debugging = true will print values to serial. Remember to set it back to false to avoid credentail leaks
 You can flash using software [nodemcu-pyflasher](https://github.com/marcelstoer/nodemcu-pyflasher/releases)
 
 1. Select Serial port (COM# port) where your serial-to-USB or NodeMCU/D1 mini is connected. Leave on auto-select if not sure.
@@ -79,8 +81,8 @@ At this page you can have WemosEM scan for available Wi-Fi networks. Select and 
 <img src="images/installation05.jpg" alt="installation05" align="right" width="200"/>
 Finally, connect with IP or http://wemosem-xxxxxx.local/ and enter default user and passwor:
 
-* **Default user: wemosem**
-* **Default password: infinito&masalla**
+* **Default user: admin**
+* **Default password: admin**
 
 Password is updatable in configuration system tab.
 
