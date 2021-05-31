@@ -213,6 +213,12 @@ bool saveConfig() {
 
   serializeJson(jsonConfig, configFile);
   serializeJson(jsonConfig, jsonString);
-  Serial.println("SAVED CONFIG: " + jsonString);
+  
+  if (Debugging){
+    Serial.println("SAVED CONFIG: " + jsonString);
+  }else{
+    Serial.println("SAVED CONFIG");
+  }
+
   return true;
 }

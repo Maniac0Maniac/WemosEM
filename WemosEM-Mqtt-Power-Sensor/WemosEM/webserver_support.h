@@ -366,9 +366,9 @@ void handleSaveSystem() {
   _minutestimezone = httpServer.arg("minutestimezone");
 
   Serial.print(" [WEB] - Username: " + _systemusername);
-  Serial.print(" [WEB] - Password: " + _systempassword);
+  //Serial.print(" Password: " + _systempassword);
   Serial.print(" Hostname: " + _wifi_hostname);
-  Serial.print("WEB timezone SIZE: ");
+  Serial.print("[Timezone size: ");
   Serial.print( _timezone.length());
   Serial.print(" timezone value: ");
   Serial.print( _timezone.toInt());
@@ -381,13 +381,17 @@ void handleSaveSystem() {
     json["dayReset"] = "Error: Reset day value incorrect (0-27) February restriction";
   }
 
-  if(_wifi_hostname.length() > 0) {
-    if(_wifi_hostname != wifi_hostname) {
-        must_reboot = true;
-    }
-    wifi_hostname = _wifi_hostname;
-  } else {
+
+  if(_wifi_hostname.indexOf(" ") != -1) {
+    //Cant have spaces in hostname
+    json["hostname"] = "Error: system hostname contains spaces";
+  }else if(_wifi_hostname.length() == 0) {
+    //Can't have 0 length name
     json["hostname"] = "Error: system hostname is empty";
+  } else {
+    //Reboot is the name changed
+    if(_wifi_hostname != wifi_hostname) {must_reboot = true;} 
+    wifi_hostname = _wifi_hostname;    
   }
 
   if(_systemusername.length() > 0) {
