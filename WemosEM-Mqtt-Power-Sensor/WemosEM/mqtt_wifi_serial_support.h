@@ -9,7 +9,7 @@
 */
 
 // Function defined in power_meter_support.h
-void resetKwh();
+void resetkWh();
 
 void setupOTA() {
   // Hostname defaults to esp8266-[ChipID]
@@ -96,8 +96,8 @@ void callbackMqtt(char* topic, byte* payload, unsigned int length) {
     mqtt_client.publish(mqtt_topic_status.c_str(), (char*) "online");
   } else if (command.equals(TOPIC_RESET_KWH)) {
 
-    Serial.println(" [MQTT] - Processing MQTT reset KWH ");
-    resetKwh();
+    Serial.println(" [MQTT] - Processing MQTT reset kWh ");
+    resetkWh();
   }
 
 }
@@ -115,8 +115,8 @@ String build_payload() {
   json["current"] = String(rmsCurrent);
   json["voltage"] = String(mainsVoltage);
   json["watts"] = String(rmsPower);
-  json["kwh"] = String(kiloWattHours);
-  json["beforeKwh"] = String(beforeResetKiloWattHours);
+  json["kWh"] = String(kiloWattHours);
+  json["beforekWh"] = String(beforeResetKiloWattHours);
   json["ical"] = String(Ical);
   json["mqttreconnected"] = String(reconnected_count);
   json["rssi"] = rssi;
@@ -243,7 +243,7 @@ void discoverHA() {
   sprintf_P(message, MESSAGE_HA_POWER, wifi_hostname.c_str(), wifi_hostname.c_str() );
   mqtt_client.publish(topic, strcat(message, footer), true);
 
-  // Power (kwh)
+  // Power (kWh)
   sprintf_P(topic, TOPIC_HA_KWH, wifi_hostname.c_str() );
   sprintf_P(message, MESSAGE_HA_KWH, wifi_hostname.c_str(), wifi_hostname.c_str() );
   mqtt_client.publish(topic, strcat(message, footer), true);

@@ -199,7 +199,7 @@ function loadStatus() {
       $('.current-value').html(data.current);
       $('.voltage-value').html(data.voltage);
       $('.watios-value').html(data.watios);
-      $('.kwh-value').html(data.kwh);
+      $('.kWh-value').html(data.kWh);
       $('.ical-value').html(data.ical);
       $('.mqttreconnected-value').html(data.mqttreconnected);
       $('.wifidb-value').html(data.wifidb);

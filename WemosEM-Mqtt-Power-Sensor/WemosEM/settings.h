@@ -150,7 +150,7 @@ boolean loadConfig() {
   system_password = (jsonConfig["system_password"] == "" ? DEFAULT_SYSTEM_PASSWORD : jsonConfig["system_password"].as<String>());
   dayReset = (jsonConfig["dayReset"] == "" ? 0 : jsonConfig["dayReset"]);
 
-  // KWH
+  // kWh
   wattsTotal = (jsonConfig["wattsTotal"] == "" ? 0.0 : jsonConfig["wattsTotal"]);
   kiloWattHours = (jsonConfig["kiloWattHours"] == "" ? 0.0 : jsonConfig["kiloWattHours"]);
   beforeResetKiloWattHours = (jsonConfig["beforeResetKiloWattHours"] == "" ? 0.0 : jsonConfig["beforeResetKiloWattHours"]);
@@ -200,7 +200,7 @@ bool saveConfig() {
   jsonConfig["system_password"] = system_password;
   jsonConfig["dayReset"] = dayReset;
 
-  // KWH
+  // kWh
   jsonConfig["wattsTotal"] = wattsTotal;
   jsonConfig["kiloWattHours"] = kiloWattHours;
   jsonConfig["beforeResetKiloWattHours"] = beforeResetKiloWattHours;

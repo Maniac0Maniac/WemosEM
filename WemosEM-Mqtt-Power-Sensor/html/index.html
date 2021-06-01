@@ -264,7 +264,7 @@
       $('.current-value').html(data.current);
       $('.voltage-value').html(data.voltage);
       $('.watts-value').html(data.watts);
-      $('.kwh-value').html(data.kwh);
+      $('.kWh-value').html(data.kWh);
       $('.ical-value').html(data.ical);
       $('.mqttreconnected-value').html(data.mqttreconnected);
       $('.rssi-value').html(data.rssi);
@@ -421,8 +421,8 @@
               <td class="watts-value">0.00</td>
             </tr>
             <tr>
-              <th scope="row">KWh</th>
-              <td class="kwh-value">0.00</td>
+              <th scope="row">kWh</th>
+              <td class="kWh-value">0.00</td>
             </tr>
             <tr>
               <th scope="row">Ical</th>
@@ -726,7 +726,7 @@
                 <input type="text" class="form-control form-control-sm" id="wifiHostname" placeholder="" value="">
               </div>
               <div class="col-md-6 mb-2">
-                <label for="reset-day">Day of Month to reset Kwh</label>
+                <label for="reset-day">Day of Month to reset kWh</label>
                 <input type="text" class="form-control form-control-sm" id="reset-day" placeholder="" value="">
                 <small id="blynk-host-help" class="form-text text-muted">if the value is 0 no reset</small>
               </div>

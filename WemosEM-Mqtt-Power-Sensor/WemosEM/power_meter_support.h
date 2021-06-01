@@ -12,7 +12,7 @@
 long lastEMRead = 0;  // Last EM Read
 long lastMsgMQTT = 0; // Last Message MQTT
 
-void resetKwh() {
+void resetkWh() {
 
   beforeResetKiloWattHours = kiloWattHours;
   wattsTotal = 0.0;
@@ -52,7 +52,7 @@ void em_read(bool calibrate) {
     rmsCurrent = emon.calcIrms(NUM_SAMPLES);  // Calculate Irms only
 
     rmsPower = rmsCurrent * mainsVoltage;                       // Calculates RMS Power
-    wattsTotal += ((double)rmsPower * ((millis()-lastTimeMeasure) / 1000.0)/3600.0); // Calculates kilowatt hours used since last reboot. 3600 = 60min*60sec / 1000.0 watts = kwh
+    wattsTotal += ((double)rmsPower * ((millis()-lastTimeMeasure) / 1000.0)/3600.0); // Calculates kilowatt hours used since last reboot. 3600 = 60min*60sec / 1000.0 watts = kWh
 
     kiloWattHours = wattsTotal / 1000.0;
 
@@ -63,9 +63,9 @@ void em_read(bool calibrate) {
     Serial.print(" watts: ");
     Serial.print(wattsTotal);
 
-    Serial.print(" kwh: ");
+    Serial.print(" kWh: ");
     Serial.print(kiloWattHours);
-    Serial.print(" Before reset kwh: ");
+    Serial.print(" Before reset kWh: ");
     Serial.print(beforeResetKiloWattHours);
     Serial.print(" lastTimeMeasure: ");
     Serial.println(lastTimeMeasure);
@@ -92,7 +92,7 @@ void em_loop() {
     isResetEnergyToday = false;
   } else if (!isResetEnergyToday && day(now()) == dayReset) {
 
-    resetKwh();
+    resetkWh();
     isResetEnergyToday = true;
   }
 

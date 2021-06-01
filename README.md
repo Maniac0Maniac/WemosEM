@@ -30,8 +30,8 @@ Original Gerber files for the PCB layout and the source files for Kicad are incl
 - Blynk Integration
 - ThingSpeak integration
 - OTA updates
-- Optional reset Kwh counter one day of the month
-- Reset Kwh in MQTT Topic
+- Optional reset kWh counter one day of the month
+- Reset kWh in MQTT Topic
 
 #### Components: 
 - Wemos D1 Mini / D1 Mini Pro
@@ -123,10 +123,10 @@ SCT-019 | Current | 10 Ω | 24 kΩ | 116.13 | 40 kΩ | 171.43
       value_template: "{{ value_json.watts }}"
     - platform: mqtt
       state_topic: "wemos/wemosEM-XXXXXX/power"
-      name: WemosEM-KWh
+      name: WemosEM-kWh
       icon: mdi:power-plug
-      unit_of_measurement: "KWh"
-      value_template: "{{ value_json.kwh }}"nt Cell  | Content Cell  |
+      unit_of_measurement: "kWh"
+      value_template: "{{ value_json.kWh }}"nt Cell  | Content Cell  |
 
 ## Update Voltaje with Home Assistant
 
@@ -164,8 +164,8 @@ Go to Blynk app on your phone and layout the blynk project with virtual pin numb
 - Virtual PIN V0: Voltage (V)
 - Virtual PIN V1: Current (A)
 - Virtual PIN V2: Live watts (w)
-- Virtual PIN V3: Energy (kwh)
-- Virtual PIN V4: Energy before last reset (kwh)
+- Virtual PIN V3: Energy (kWh)
+- Virtual PIN V4: Energy before last reset (kWh)
 
 Setup in web interface token auth, optional you can setup server and port server.
 
@@ -174,15 +174,15 @@ Setup in web interface token auth (Write API Key) and Channel number.
 - Field 1: Voltage (V)
 - Field 2: Current (A)
 - Field 3: Live watts (w)
-- Field 4: Energy (kwh)
-- Field 5: Energy before last reset (kwh)
+- Field 4: Energy (kWh)
+- Field 5: Energy before last reset (kWh)
 
 ## MQTT Topics
 Topic  | Description
 ------------- | -------------
 wemos-cmd/wemosEM-XXXXXX/voltage | Set/update voltage (from sonoff, shelly or other devices)
 wemos-cmd/wemosEM-XXXXXX/status | Get Status of wemosEM
-wemos-cmd/wemosEM-XXXXXX/resetkwh | reset kwh and store and beforeResetkwh variable
+wemos-cmd/wemosEM-XXXXXX/resetkWh | reset kWh and store and beforeResetkWh variable
 
 ## OTA Updates
 OTA updates from platformio windows with espota:
